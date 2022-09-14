@@ -3,12 +3,12 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("test Graphs")
 	Nodes := []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}
 	Edges := [][]string{{"A", "B"}, {"B", "C"}, {"E", "E"}}
 	graph := NewGraph(Nodes, Edges)
-	x := graph.GetAdjencancyMatrix()
+	x := graph.GetAdjacencyMatrix()
 	graph.PrintMatrix(x)
-	//fmt.Println(graph.Nodes, x)
-
+	L := graph.GetAdjacencyList()
+	graph.PrintList(L)
+	fmt.Println("")
 }

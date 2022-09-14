@@ -25,9 +25,7 @@ func NewGraph(nodes []string, edges [][]string) *Graph {
 		node := v
 		Nodes = append(Nodes, node)
 	}
-	sort.Slice(Nodes, func(i, j int) bool {
-		return Nodes[i] < Nodes[j]
-	})
+	sort.Strings(Nodes)
 	var Edges []Edge
 	for _, v := range edges {
 		edge := new(Edge)
@@ -41,7 +39,7 @@ func NewGraph(nodes []string, edges [][]string) *Graph {
 	return g
 }
 
-func (g *Graph) GetAdjencancyMatrix() map[string]map[string]int {
+func (g *Graph) GetAdjacencyMatrix() map[string]map[string]int {
 	matrix := map[string]map[string]int{}
 	// init the matrix with 0s
 	for _, v1 := range g.Nodes {
@@ -61,26 +59,49 @@ func (g *Graph) GetAdjencancyMatrix() map[string]map[string]int {
 }
 
 func (g *Graph) PrintMatrix(matrix map[string]map[string]int) {
+	fmt.Println("")
+	fmt.Println("Adjacency Matrix")
 	var header string = "    "
-	keys := make([]string, len(matrix))
-	i := 0
-	for k, _ := range matrix {
-		keys[i] = k
-		i++
-	}
-	sort.Strings(keys)
-	for _, v := range keys {
+	for _, v := range g.Nodes {
 		header += v + "  "
 	}
 	fmt.Println(header)
 	lines := map[string]string{}
-	for _, v := range keys {
+	for _, v := range g.Nodes {
 		subM := matrix[v]
-		for _, v2 := range keys {
+		for _, v2 := range g.Nodes {
 			lines[v2] += strconv.Itoa(subM[v2]) + "  "
 		}
 	}
-	for _, v := range keys {
+	for _, v := range g.Nodes {
 		fmt.Println(v, ":", lines[v])
+	}
+}
+
+func (g *Graph) GetAdjacencyList() map[string][]string {
+	list := make(map[string][]string, len(g.Nodes))
+	for _, v := range g.Nodes {
+		list[v] = make([]string, 0)
+	}
+	for _, v := range g.Edges {
+		list[v.A] = append(list[v.A], v.B)
+	}
+	return list
+}
+
+func (g *Graph) PrintList(list map[string][]string) {
+	fmt.Println("")
+	fmt.Println("Adjacency List")
+	for _, node := range g.Nodes {
+		line := node + ":"
+		if len(list[node]) > 0 {
+			for _, element := range list[node] {
+				line += " -> " + element
+			}
+		} else {
+			line += " [] "
+		}
+
+		fmt.Println(line)
 	}
 }
