@@ -11,4 +11,6 @@ func main() {
 	L := graph.GetAdjacencyList()
 	graph.PrintList(L)
 	fmt.Println("")
+	c := graph.GetConnectedGroupsCount()
+	fmt.Println("Connected groups: ", c)
 }

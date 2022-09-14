@@ -101,7 +101,32 @@ func (g *Graph) PrintList(list map[string][]string) {
 		} else {
 			line += " [] "
 		}
-
 		fmt.Println(line)
+	}
+}
+
+func (g *Graph) GetConnectedGroupsCount() int {
+	visited := make(map[string]bool, len(g.Nodes))
+	for _, v := range g.Nodes {
+		visited[v] = false
+	}
+	//fmt.Println(visited)
+	var count int
+	for _, v := range g.Nodes {
+		if visited[v] == false {
+			g.dfs(v, visited)
+			count++
+		}
+	}
+	return count
+}
+
+func (g *Graph) dfs(index string, visited map[string]bool) {
+	visited[index] = true
+	list := g.GetAdjacencyList()
+	for _, v := range list[index] {
+		if visited[v] == false {
+			g.dfs(v, visited)
+		}
 	}
 }
