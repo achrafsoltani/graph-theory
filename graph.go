@@ -80,7 +80,7 @@ func (g *Graph) PrintMatrix(matrix map[string]map[string]int) {
 			lines[v2] += strconv.Itoa(subM[v2]) + "  "
 		}
 	}
-	for k, v := range lines {
-		fmt.Println(k, ":", v)
+	for _, v := range keys {
+		fmt.Println(v, ":", lines[v])
 	}
 }

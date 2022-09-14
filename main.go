@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	fmt.Println("test Graphs")
 	Nodes := []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}
-	Edges := [][]string{{"A", "B"}, {"B", "C"}}
+	Edges := [][]string{{"A", "B"}, {"B", "C"}, {"E", "E"}}
 	graph := NewGraph(Nodes, Edges)
 	x := graph.GetAdjencancyMatrix()
 	graph.PrintMatrix(x)
