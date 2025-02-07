@@ -8,8 +8,8 @@ import (
 
 type Graph struct {
 	isDirected bool
-	Nodes      []string
-	Edges      []Edge
+	Nodes      []string // AKA Vertex
+	Edges      []Edge   // AKA Links
 }
 
 // type Node string
@@ -129,4 +129,9 @@ func (g *Graph) dfs(index string, visited map[string]bool) {
 			g.dfs(v, visited)
 		}
 	}
+}
+
+func (g *Graph) bfs() {
+	v := len(g.Nodes)
+	matrix := g.GetAdjacencyMatrix()
 }
